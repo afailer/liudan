@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myClock" width="500" height="500"></canvas>
+</body>
+<script>
+    function drawPercent(num) {
+        pen.beginPath();
+        pen.fillStyle = 'red';
+        pen.font = ' 20px Arial'
+        pen.textAlign = 'center';
+        pen.textBaseline = 'middle';
+        pen.fillText(num+'%',100,100)
+        let angle = (-Math.PI/2) + num*2*Math.PI/100
+        pen.arc(100,100,60,-Math.PI/2,angle)
+        pen.stroke();
+    }
+    
+    const canvas = document.getElementById('myClock');
+    const pen = canvas.getContext('2d');
+    pen.moveTo(100,200)
+    pen.lineTo(200,200);
+    pen.stroke();
+    let percent = 0;
+    let timer = setInterval(function(){
+        pen.clearRect(0,0,500,500)
+        drawPercent(percent);
+        console.log(percent)
+        percent++;
+        if(percent > 100 ){
+            clearInterval(timer)
+        }
+    },100)
+    
+    
+    
+</script>
+</html>

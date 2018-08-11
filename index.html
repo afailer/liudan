@@ -9,5 +9,40 @@
 <body>
     
 </body>
-<script src="./index.js"></script>
+<script type="text/javascript">
+    let a = {
+        name: "andy",
+        age: 18,
+        address: "wangjing"
+    }
+    let url = "www.baidu.com"
+    arr = []
+    Object.keys(a).forEach(item => {
+        let str = item+'='+a[item]
+        arr.push(str)
+    })
+    if(!url.endsWith('?')){
+        url+='?'
+    }
+    url += arr.join('&');
+    let arr1 = ["aaa",'bbb']
+    let newArr = arr.concat(arr1)
+    let str = "sfdsfsdfsdfds  "
+    let arr4 = str.split('')
+    //console.log(str.trim().length)
+    let aa = ['12','23','34']
+    //console.log(parseInt('12.23423')+parseFloat('23'));
+    console.log(arr1.indexOf('bbb'))
+    let arrNum = [1,56,35,98,12,24,33]
+    for (let i=0; i < arrNum.length ;i++){
+        for (j=i+1; j<arrNum.length; j++){
+            if(arrNum[i] > arrNum[j]){
+                let temp =arrNum[i]
+                arrNum[i] = arrNum[j];
+                arrNum[j] =temp
+            }
+        }
+    }
+    console.log(arrNum)
+</script>
 </html>
