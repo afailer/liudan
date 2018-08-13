@@ -1,0 +1,18 @@
+git clone + git地址  克隆线上仓库到本地
+git checkout -b v1.0 origin/v1.0 本地创建v1.0分支，并拉取线上v1.0分支
+git status 查看当前分支的状态，如有没有没有提交的文件
+git add .添加新的文件
+git commit -m 'xxx' 将add的文件加入本地仓库
+git pull origin v1.0 将线上修改的内容同步到本地  执行push之前需要先commit，然后执行pull
+git push origin v1.0 将已经commit到本地仓库的文件推到线上仓库
+
+git remote -v 查看当前项目的git地址
+git branch   查看本地分支
+创建本地分支git branch 分支名  新分支的内容和当前所在分支内容一样
+git push origin 分支名 将当前分支推到线上
+git branch -a 列出本地和线上所有分支
+
+git log 查看本地日志（比如commit了多少次，可以看到commit后Git生成的版本号）
+恢复当前整个项目到以前的某个版本 git reset --hard + (commit后Git生成的版本号)
+
+恢复某一个文件 git checkout 版本号 + 文件名
