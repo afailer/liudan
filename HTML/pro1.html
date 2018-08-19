@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let myCount = (function count(){
+        let index = 0;
+        return function a(){
+            index++;
+            console.log(index)
+        }
+    })()
+    
+    document.onmousedown = myCount
+
+    class Base {
+        constructor(){
+            this.salary = 1;
+            this.ask = function(){
+                console.log(this.salary)
+                this.salary++
+                console.log(this.salary+'---------')
+            }
+        }
+        
+    }
+    Base.prototype.age = 1;
+    Base.prototype.say = () => {
+        console.log(Base.prototype.age)
+        Base.prototype.age ++ ;
+        console.log(Base.prototype.age+'=============')
+
+    }
+    let base1 = new Base()
+    
+    let base2 = new Base()
+    base1.say();
+    base2.say();
+    base1.say();
+</script>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+				width: 800px;
+				height: 450px;
+				margin: 100px auto;
+				border: 1px solid red;
+				position: relative;
+                
+			}
+    #ball{
+        width: 30px;
+        height: 30px;
+        background: black;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 22px;
+        left: 20px;
+    }
+    #board{
+				height: 20px;
+				width: 100px;
+				background: orange;
+				border: 1px solid red;
+				border-radius: 10px;
+				position: absolute;
+				bottom: 0;
+			}
+    .brick{
+				width: 80px;
+				height: 20px;
+				background: red;
+				position:absolute;
+                
+			}
+</style>
+<body>
+    <div id="container">
+        <div id="ball"></div>
+        <div id="board"></div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-1.11.1.js" ></script>
+<script type="text/javascript" src="js/public.js" ></script>
+<script type="text/javascript" src="js/myDrag.js" ></script>
+<script>
+    window.onload=function(){
+        let ball = new Ball();
+        
+    }
+    class Ball{
+        constructor(){
+            this.ball = $("#ball");
+            this.board = $("#board");
+            this.container = $("#container");
+            this.speedX = 2;
+            this.speedY = -2;
+            new Drag().init({
+                obj: $("#board"),
+                parent: $("#container")
+            })
+            this.addBricks();
+            this.startMove();
+        }
+        addBricks(){
+            console.log("addbreick")
+            let height = 20;
+            let width = 80;
+            let that = this
+            let addBrickLine = function(top){
+                for(let l=0;l<10;l++){
+                    let div = $("<div></div>");
+                    div.addClass('brick');
+                    div.css('top',top*height + 'px');
+                    div.css('left',width*l+'px');
+                    div.css('background-color',getColor())
+                    that.container.append(div);
+                }
+            }
+            for(let l=0;l<6;l++){
+                addBrickLine(l);
+            }
+            this.bricks = $('.brick');
+        }
+        startMove(){
+            this.timer = setInterval(function(){
+                this.ball.css('top',this.ball.position().top + this.speedY);
+                this.ball.css('left',this.ball.position().left + this.speedX);
+                if( this.ball.position().left < 1 
+                    || this.ball.position().left > this.container.width() - this.ball.width()
+                 ){
+                     this.speedX = this.speedX*(-1);
+                 }
+                 if(this.ball.position.top < 0){
+                     this.speedY = this.speedY* (-1);
+                 }
+                 if(this.pz(this.ball,this.board)){
+                     this.speedY = this.speedY*(-1);
+                 }
+                for(let l=0; l < this.bricks.length; l++){
+                    if(this.pz(this.bricks.eq(l),this.ball)){
+                        this.speedY = this.speedY * (-1);
+                        this.bricks.eq(l).remove();
+                    }
+                }
+                if(this.ball.position().top + this.ball.height() > this.container.height()){
+                    clearInterval(this.timer);
+                }
+            }.bind(this),30)
+        }
+        pz(obj1,obj2){
+            let flag =true;
+            let obj1Top = obj1.position().top;
+            let obj1Left = obj1.position().left;
+            let obj1Width = obj1.width();
+            let obj1Height = obj1.height();
+
+            var obj2Top=obj2.position().top;
+			var obj2Left=obj2.position().left;
+			var obj2Width=obj2.width();
+            var obj2Height=obj2.height();
+            if(obj1Left+obj1Width < obj2Left){
+                flag = false;
+            }else if(obj1Left > obj2Left + obj2Width) {
+                flag =false;
+            }else if(obj1Top > obj2Top+ obj2Height){
+                flag = false;
+            }else if(obj1Top + obj1Height < obj2Top){
+                flag = false;
+            }
+            return flag
+        }
+    }
+</script>
+</html>

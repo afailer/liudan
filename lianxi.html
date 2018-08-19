@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    let url = 'www.baidu.com'
+     let arr = ['aa','bb','cc']
+     arr.forEach((item) => {
+         console.log(item)
+     })
+     let obj = {
+         name: 'andy',
+         age: 18
+     }
+     let keys = Object.keys(obj)
+     let strArr  = []
+     keys.forEach((key) => {
+         let s = key + '=' + obj[key]
+         strArr.push(s)
+     })
+     if(url.endsWith("?")){
+         url = url + strArr.join("&")
+     }else{
+         url = url + '?' + strArr.join('&')
+     }
+     console.log(url)
+</script>
+</html>

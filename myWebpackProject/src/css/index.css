@@ -1,0 +1,6 @@
+.bg{
+    width: 300px;
+    height: 600px;
+    margin: 0 auto;
+    background: url('./imgs/bg.jpg') no-repeat
+}
