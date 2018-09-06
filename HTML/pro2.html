@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    window.index = 9
+    function Me(){
+        if(Me.instance === undefined){
+            Me.instance = {
+                index: 1,
+                plus: function(){
+                    this.index++;
+                    console.log(this.index)
+                    return this
+                }
+            }
+        }
+        
+        return Me.instance
+    }
+    Me();
+    let a = Me().plus.bind(Me.instance);
+    a();
+</script>
+</html>

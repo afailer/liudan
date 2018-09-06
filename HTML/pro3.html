@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function Person(name){
+        this.name = name,
+        this.say = function(){
+            console.log('my name is'+ this.name)
+        }
+    }
+    Person.prototype.ask = function(){
+        console.log('ask')
+    }
+    function Teacher(name, salary){ 
+        Person.apply(this, arguments)
+        
+        this.salary = salary
+    }
+    Teacher.prototype = new Person("");
+    let p = new Person('andy')
+    p.ask();
+    let t = new Teacher('lily', 1000)
+    t.ask();
+
+    class parent {
+        constructor(job){
+            this.job = job
+            this.say = function(){
+                console.log(this.job)
+            }
+        }
+    }
+    parent.prototype.want = function(){
+        console.log('want')
+    }
+    class Child extends parent{
+        constructor(){
+            super(arguments[0]);
+        }
+    }
+    new parent('worker').want()
+    new Child('student').want()
+    console.log(Math.random())
+</script>
+</html>
