@@ -19,8 +19,13 @@ function MyPlain() {
         document.onkeydown = (e) => {
           switch (e.keyCode){
             case 48:
-
               this.fire('common')
+              break;
+            case 57:
+              this.fire('super')
+              break;
+            case 56:
+              this.fire('5c')
           }
         }
       },
@@ -29,7 +34,14 @@ function MyPlain() {
           console.log(this.me.offsetTop)
           new CommonBullet().fire(this.me)
         }else if(kind === 'super'){
+          console.log('--super--')
           new SuperBullet().fire(this.me)
+        }else if(kind === '5c'){
+          for(let l=1; l<6; l++){
+            let left = main.width()/6;
+            left = left*l;
+            new CommonBullet().fire(this.me, left);
+          }
         }
       }
     }

@@ -46,15 +46,27 @@ function EnemyManager() {
       livingEnemies: [],
       isHit: function (bullet) {
         for (let l = 0;l < this.livingEnemies.length; l++){
-          if(pz(this.livingEnemies[l]), bullet){
-            this.livingEnemies[l].crash(bullet)
+          if(pz(this.livingEnemies[l].plain, bullet)){
+            this.livingEnemies[l].hitted();
             return true;
           }
         }
         return false;
       },
       init: function () {
-        
+        setInterval(function () {
+          const type = getRand(1,10);
+          let enemy = undefined;
+          if(type < 7){
+            enemy = new CommonEnemy();
+          }else{
+            enemy = new BigEnemy();
+          }
+          this.livingEnemies.push(enemy);
+        }.bind(this),1000)
+      },
+      remove: function (enemy) {
+        this.livingEnemies.splice(this.livingEnemies.indexOf(enemy),1);
       }
     }
   }
