@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="input">
+  <button id="btn">add</button>
+  <p>todo</p>
+  <ul id="ul"></ul>
+  <p>done</p>
+  <ul id="done"></ul>
+</body>
+<script>
+  const getEle = (id) => {
+    return document.getElementById(id);
+  }
+  const createELe = (name) => {
+    return document.createElement(name);
+  }
+  const addMinus = (li) => {
+    const remove = createELe('button');
+    remove.innerText = '-'
+    remove.onclick = function () {
+      this.parentNode.remove();
+    }
+    li.appendChild(remove);
+  }
+  const addStateBtn = (li) => {
+    const inputState = createELe('input');
+    inputState.type = 'checkbox';
+    inputState.onchange = function (e) {
+      if(e.target.checked){
+        done.appendChild(this.parentNode)
+      }else{
+        ul.appendChild(this.parentNode)
+      }
+    };
+    li.appendChild(inputState);
+  }
+  const input = document.getElementById('input');
+  const btn = getEle('btn');
+  const ul = getEle('ul');
+  const done = getEle('done');
+
+  btn.onclick = (e) => {
+    const li = document.createElement('li');
+    li.innerText = input.value;
+    getEle('input').value = '';
+    addMinus(li);
+    addStateBtn(li);
+    ul.appendChild(li);
+  }
+
+</script>
+</html>
